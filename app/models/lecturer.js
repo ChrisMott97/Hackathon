@@ -10,7 +10,7 @@ var lecturerSchema = mongoose.Schema({
         lastname     : String,
         subject      : String,
         modules      : [{type: String}],
-        posts        : [{type: Schema.Types.ObjectId, ref: 'Post'}]
+        posts        : [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
     }
 });
 

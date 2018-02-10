@@ -12,7 +12,8 @@ var userSchema = mongoose.Schema({
         password     : String,
         firstname    : String,
         lastname     : String,
-        year         : Number
+        year         : Number,
+        posts        : [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
     },
     facebook         : {
         id           : String,

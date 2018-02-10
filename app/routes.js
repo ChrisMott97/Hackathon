@@ -5,6 +5,7 @@ module.exports = function(app, passport) {
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function(req, res) {
+        res.render('search.ejs')
     });
 
     // =====================================
@@ -62,6 +63,10 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+
+    app.post('/results', function(req, res) {
+        res.render('results.ejs')
+    })
 };
 
 // route middleware to make sure a user is logged in
