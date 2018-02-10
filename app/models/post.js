@@ -7,7 +7,8 @@ var postSchema = mongoose.Schema({
 
     local            : {
         rating       : Number,
-        comment      : String
+        comment      : String,
+        lecturer     : {type: Schema.Types.ObjectId, ref: 'Lecturer'}
     }
 });
 
