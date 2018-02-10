@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 //Import the mongoose module
 var mongoose = require('mongoose');
+var Snake = require('./models/User.js');
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://chris:password@ds229388.mlab.com:29388/hackathon';

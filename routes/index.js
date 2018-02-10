@@ -5,6 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'DO MY WASHING UP!' });
 });
+
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
