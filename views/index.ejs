@@ -3,13 +3,48 @@
 <html>
 <head>
   <title>Homepage</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue">
+  export default {
+    data () {
+      return {
+        text: ''
+      }
+    }
+  }
+  </script>
 </head>
 <body>
-  <form action="/action_page.php">
+  <p>Rating 1-5<p>
+  <form>
+  <input type="radio" name="rating" value="1" checked>1<br>
+  <input type="radio" name="rating" value="2">2<br>
+  <input type="radio" name="rating" value="3">3<br>
+  <input type="radio" name="rating" value="4">4<br>
+  <input type="radio" name="rating" value="5">5
+  </form>
+
+  <p>Comments</p>
+  <form>
   <textarea name="message" rows="10" cols="30"></textarea>
   <br>
   <input type="submit">
+
+  <div id='example-textarea'>
+    <span>Comment Preview:</span>
+    <p>{{message}}</p>
+    <br>
+    <textarea v-model="message" placeholder="Your comment here"></textarea>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#example-textarea',
+      data: {
+        message: ''
+      }
+    })
+  </script>
+
 </form>
 </body>
 </html>
