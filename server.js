@@ -8,6 +8,7 @@ var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
+var StarRating = require('vue-star-rating');
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -41,4 +42,3 @@ app.use(express.static('public'))
 // launch ======================================================================
 app.listen(port);
 console.log('The magic happens on port ' + port);
-
