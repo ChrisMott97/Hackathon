@@ -1,12 +1,9 @@
-// app/routes.js
+
 var mongoose = require('mongoose');
 var lecturer = require("./models/lecturer.js");
 var post = require("./models/post.js");
 module.exports = function(app, passport) {
 
-    // =====================================
-    // HOME PAGE (with login links) ========
-    // =====================================
     app.get('/', guestOnly, function(req, res) {
         res.render('search.ejs')
     });
@@ -15,50 +12,29 @@ module.exports = function(app, passport) {
       res.render('reviewPage.ejs')
     });
 
-    // =====================================
-    // LOGIN ===============================
-    // =====================================
-    // show the login form
     app.get('/login', function(req, res) {
-
-        // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') });
     });
-    // process the login form
+
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/home', // redirect to the secure profile section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
+        successRedirect : '/home', 
+        failureRedirect : '/login', 
+        failureFlash : true 
     }));
 
-    // process the login form
-    // app.post('/login', do all our passport stuff here);
-
-    // =====================================
-    // SIGNUP ==============================
-    // =====================================
-    // show the signup form
     app.get('/signup', guestOnly, function(req, res) {
         res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
     app.post('/signup', guestOnly, passport.authenticate('local-signup', {
-        successRedirect : '/home', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
+        successRedirect : '/home', 
+        failureRedirect : '/signup', 
+        failureFlash : true 
     }));
 
-    // process the signup form
-    // app.post('/signup', do all our passport stuff here);
-
-    // =====================================
-    // PROFILE SECTION =====================
-    // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/home', isLoggedIn, function(req, res) {
         res.render('home.ejs', {
-            user : req.user // get the user out of session and pass to template
+            user : req.user 
         });
     });
 
@@ -105,7 +81,8 @@ module.exports = function(app, passport) {
                     lecturer: result,
                     posts: new_posts,
                     avg: avg,
-                    url: '/lecturer/' + req.params.username
+                    url: '/lecturer/' + req.params.username,
+                    module_url: '/lecturer/' + req.params.username + '/modules/'
                 })
             }).sort({createdAt: -1})
         }).limit(1);
@@ -120,6 +97,21 @@ module.exports = function(app, passport) {
             })
         })
     })
+    app.post('/lecturer/:username/modules',isLoggedIn, function(req, res) {
+        var new_module = req.body.module;
+        lecturer.findOne({"username": req.params.username}, function(err, result){
+            result.modules.push(new_module);
+            result.save();
+            res.redirect('/lecturer/'+req.params.username)
+        })
+    });
+    app.get('/lecturer/:username/modules', isLoggedIn, function(req, res) {
+        lecturer.findOne({"username": req.params.username}, function(err, lecturer_new){
+            res.render('modules.ejs', {
+                url: '/lecturer/' + req.params.username + '/modules'
+            });
+        })
+    })
     app.get('/user', isLoggedIn, function(req, res) {
         post.find({user: req.user.local.username}, function(err, results){
             res.render('user.ejs', {
@@ -130,13 +122,11 @@ module.exports = function(app, passport) {
     })
 };
 
-// route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
     if (req.isAuthenticated())
         return next();
 
-    // if they aren't redirect them to the home page
     res.redirect('/login');
 }
 function guestOnly(req, res, next) {
