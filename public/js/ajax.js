@@ -7,15 +7,15 @@ $("#search").submit(function(e) {
         $(".results").empty();
         $.each(lecturers, function(index, lecturer) {
             $(".results").append(
-                '<br><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="well"><h3>' + 
-            lecturer.firstname + ' ' + lecturer.lastname + '</h3><br>' +
+                '<br><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="well"><h3><a href="/lecturer/'+lecturer.username+'">' + 
+            lecturer.firstname + ' ' + lecturer.lastname + '</a></h3><br>' +
             lecturer.subject + '</div> </div> </div>'
             );
         });
         $(".results").append(
-            '<br><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="well"><h3>'+
+            '<br><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="well"><h3><a href="/lecturer">'+
             'Can\'t find your lecturer? Add them!'
-            +'</h3</div> </div> </div>'
+            +'</a></h3</div> </div> </div>'
             );
     });
     $('html, body').animate({

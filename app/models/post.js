@@ -6,7 +6,7 @@ var timestamps = require('mongoose-timestamp');
 var postSchema = mongoose.Schema({
     rating       : Number,
     comment      : String,
-    lecturer     : {type: mongoose.Schema.Types.ObjectId, ref: 'Lecturer'}
+    lecturer     : String
 });
 
 postSchema.plugin(timestamps);

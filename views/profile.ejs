@@ -3,28 +3,116 @@
 <html>
 <head>
     <title>Profile</title>
+    <link rel="stylesheet" href="/css/ratings.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:10px; text-align: center}
-    </style>
 </head>
 <body>
 <div class="container">
 
-<div class="col-sm-6 col-sm-offset-3">
-
+<div class="col-sm-8 col-sm-offset-2 main">
+    <div class="col-sm-10 col-sm-offset-1">
+    <a href="/" class="btn btn-default">Return</a>
     <h1><%= lecturer.firstname + " " + lecturer.lastname%></h1>
     <h3><%= lecturer.subject %></h3>
-
-    <form action="/lecturer/" <%= lecturer.username %> method="post"</form>
-        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-        <input type="submit" value="Submit">
-    </form>
+    <div id='example-textarea'>
+        <form action=<%= url %> method="post">
+            <fieldset class="rate">
+                <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label>
+                <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
+                <input type="radio" id="rating8" name="rating" value="8" /><label for="rating8" title="4 stars"></label>
+                <input type="radio" id="rating7" name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
+                <input type="radio" id="rating6" name="rating" value="6" /><label for="rating6" title="3 stars"></label>
+                <input type="radio" id="rating5" name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
+                <input type="radio" id="rating4" name="rating" value="4" /><label for="rating4" title="2 stars"></label>
+                <input type="radio" id="rating3" name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
+                <input type="radio" id="rating2" name="rating" value="2" /><label for="rating2" title="1 star"></label>
+                <input type="radio" id="rating1" name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
+            </fieldset>
+            <br>
+            <textarea v-model="message" name = "comment" class="form-control" placeholder=""></textarea><br>
+            <input type="submit" class="btn btn-default" disabled name="submit">
+        </form>
+        <div class="row">
+            <br>
+            <div class="col-sm-12 preview well">
+                <div id="preview" class="ratings">
+                </div>
+                <br>
+                {{message}}
+            </div>
+        </div>
+        <br>
+    </div>
+    <% posts.forEach(function(post){ %>
+    <div class="row">
+        <div class="card well">
+            <div class="row ratings">
+                <% if (post.rating == 1) { %>
+                    <i class="fa fa-star-half-empty"></i>
+                <% } else if(post.rating == 2){ %>
+                    <i class="fa fa-star"></i>
+                <% } else if(post.rating == 3){ %>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-empty"></i>
+                <% } else if(post.rating == 4){ %>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                <% } else if(post.rating == 5){ %>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-empty"></i>
+                <% } else if(post.rating == 6){ %>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                <% } else if(post.rating == 7){ %>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-empty"></i>
+                <% } else if(post.rating == 8){ %>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                <% } else if(post.rating == 9){ %>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-empty"></i>
+                <% } else if(post.rating == 10){ %>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                <% } %>
+            </div>
+            <%= post.comment %>
+        </div>
+    </div>
+    <br>
+    <% }); %>
+    <script>
+        new Vue({
+        el: '#example-textarea',
+        data: {
+            message: ''
+        }
+        })
+    </script>
 
 </div>
-
 </div>
+</div>
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="/js/stars.js"></script>
 </body>
 </html>
 

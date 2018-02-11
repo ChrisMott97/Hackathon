@@ -1,6 +1,7 @@
 // app/routes.js
 var mongoose = require('mongoose');
 var lecturer = require("./models/lecturer.js");
+var post = require("./models/post.js");
 module.exports = function(app, passport) {
 
     // =====================================
@@ -61,11 +62,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/search', function(req, res) {
-        res.render('search.ejs')
-    })
-
-    app.get('/logout', function(req, res) {
+    app.get('/logout', isLoggedIn, function(req, res) {
         req.logout();
         res.redirect('/');
     });
@@ -89,17 +86,31 @@ module.exports = function(app, passport) {
             res.redirect('/lecturer');
         });
     })
-    app.get('/lecturer', function(req, res) {
+    app.get('/lecturer', isLoggedIn, function(req, res) {
         res.render('lecturer');
     })
     app.get('/lecturer/:username', function(req, res) {
         lecturer.findOne({"username": req.params.username}, function(err, result){
-            if(err) return handleError(err);
-            console.log(result);
-            res.render('profile.ejs', {
-                lecturer: result
+            if(!result) res.redirect('/');
+            post.find({"lecturer": req.params.username}, function(err, new_posts){
+                res.render('profile.ejs', {
+                    lecturer: result,
+                    posts: new_posts,
+                    url: '/lecturer/' + req.params.username
+                })
+            }).sort({createdAt: -1})
+        }).limit(1);
+    })
+    app.post('/lecturer/:username',isLoggedIn, function(req, res) {
+        var comment = req.body.comment;
+        var rating = req.body.rating;
+        lecturer.findOne({"username": req.params.username}, function(err, result){
+            if(!result) res.redirect('/');
+            post.create({comment: comment, rating: rating, lecturer: req.params.username}, function(err, new_post) {
+                //req.user.local.posts.push(new_post);
+                res.redirect('/lecturer/'+req.params.username);
             })
-        });
+        })
     })
 };
 
@@ -110,7 +121,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/login');
 }
 function guestOnly(req, res, next) {
     if (!req.isAuthenticated())

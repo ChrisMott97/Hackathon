@@ -19,5 +19,7 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.4",
     "vue": "^2.5.13"
+  },"engines": {
+    "node": "8.9.4"
   }
 }
