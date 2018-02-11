@@ -93,9 +93,18 @@ module.exports = function(app, passport) {
         lecturer.findOne({"username": req.params.username}, function(err, result){
             if(!result) res.redirect('/');
             post.find({"lecturer": req.params.username}, function(err, new_posts){
+                var sum = 0;
+                var count = 0;
+                new_posts.forEach(post => {
+                    sum += post.rating;
+                    console.log(sum);
+                    count += 1;
+                });
+                var avg = sum/count;
                 res.render('profile.ejs', {
                     lecturer: result,
                     posts: new_posts,
+                    avg: avg,
                     url: '/lecturer/' + req.params.username
                 })
             }).sort({createdAt: -1})
@@ -106,11 +115,18 @@ module.exports = function(app, passport) {
         var rating = req.body.rating;
         lecturer.findOne({"username": req.params.username}, function(err, result){
             if(!result) res.redirect('/');
-            post.create({comment: comment, rating: rating, lecturer: req.params.username}, function(err, new_post) {
-                //req.user.local.posts.push(new_post);
+            post.create({comment: comment, rating: rating, lecturer: req.params.username, user: req.user.local.username}, function(err, new_post) {
                 res.redirect('/lecturer/'+req.params.username);
             })
         })
+    })
+    app.get('/user', isLoggedIn, function(req, res) {
+        post.find({user: req.user.local.username}, function(err, results){
+            res.render('user.ejs', {
+                user: req.user,
+                posts: results
+            })
+        }).sort({createdAt: -1})
     })
 };
 

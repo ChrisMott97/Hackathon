@@ -8,8 +8,7 @@ var lecturerSchema = mongoose.Schema({
     lastname     : String,
     username     : String,
     subject      : String,
-    modules      : [{type: String}],
-    posts        : [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
+    modules      : [{type: String}]
 });
 
 

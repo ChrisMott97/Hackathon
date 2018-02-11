@@ -13,6 +13,8 @@ body {
 }
 .preview.well{
     background-color: rgb(255, 255, 255);
+    border-style: dashed;
+    border-width: 5px;
 }
 
 .custom-text {

@@ -6,7 +6,8 @@ var timestamps = require('mongoose-timestamp');
 var postSchema = mongoose.Schema({
     rating       : Number,
     comment      : String,
-    lecturer     : String
+    lecturer     : String,
+    user         : String
 });
 
 postSchema.plugin(timestamps);

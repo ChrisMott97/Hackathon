@@ -1,0 +1,78 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/ratings.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+                <a href="/" class="btn btn-default">Return</a>
+            <h2><%= user.local.firstname %> <%= user.local.lastname %></h2>
+            <h3><%= user.local.email %></h3>
+            <% posts.forEach(function(post){ %>
+                <div class="row well">
+                    <h4><%= post.lecturer %></h4>
+                    <div class="row ratings">
+                            <% if (post.rating == 1) { %>
+                                <i class="fa fa-star-half-empty"></i>
+                            <% } else if(post.rating == 2){ %>
+                                <i class="fa fa-star"></i>
+                            <% } else if(post.rating == 3){ %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-empty"></i>
+                            <% } else if(post.rating == 4){ %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            <% } else if(post.rating == 5){ %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-empty"></i>
+                            <% } else if(post.rating == 6){ %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            <% } else if(post.rating == 7){ %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-empty"></i>
+                            <% } else if(post.rating == 8){ %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            <% } else if(post.rating == 9){ %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-empty"></i>
+                            <% } else if(post.rating == 10){ %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            <% } %>
+                        </div>
+                    <p><%= post.comment %></p>
+                    <small><%= post.createdAt %></small>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="/js/stars.js"></script>
+</body>
+</html>
+
