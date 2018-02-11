@@ -4,12 +4,9 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
 var postSchema = mongoose.Schema({
-
-    local            : {
-        rating       : Number,
-        comment      : String,
-        lecturer     : {type: mongoose.Schema.Types.ObjectId, ref: 'Lecturer'}
-    }
+    rating       : Number,
+    comment      : String,
+    lecturer     : {type: mongoose.Schema.Types.ObjectId, ref: 'Lecturer'}
 });
 
 postSchema.plugin(timestamps);

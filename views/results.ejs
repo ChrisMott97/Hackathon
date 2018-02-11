@@ -13,24 +13,21 @@
 <div class="container">
 
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <h1><span class="fa fa-anchor"></span> Results</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-12">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+        <div class="col-sm-8 col-sm-offset-2">
+            <% lecturers.forEach(function(lecturer) { %>
+                <div class="well">
+                    <%= lecturer.firstname %> <%= lecturer.lastname%>
 
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-            </div>
+                </div>
+            <% }); %>
+                
         </div>
 
     </div>

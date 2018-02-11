@@ -1,4 +1,6 @@
 // app/routes.js
+var mongoose = require('mongoose');
+var lecturer = require("./models/lecturer.js");
 module.exports = function(app, passport) {
 
     // =====================================
@@ -64,8 +66,25 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
-    app.post('/results', function(req, res) {
-        res.render('results.ejs')
+    app.get('/lecturers', function(req, res) {
+        lecturer.find(function(err, results){
+            console.log(results);
+            res.render('results.ejs', {
+                lecturers : results
+            })
+        });
+    })
+
+    app.get('/lecturer', function(req, res) {
+        res.render('lecturer.ejs')
+    })
+
+    app.post('/lecturer', function(req, res){
+        lecturer.create({ firstname: req.body.firstname , lastname: req.body.lastname, subject: req.body.subject}, function (err, new_lecturer) {
+            if (err) return handleError(err);
+            console.log(new_lecturer);
+            res.redirect('/lecturers');
+        });
     })
 };
 
