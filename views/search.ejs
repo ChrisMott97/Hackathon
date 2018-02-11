@@ -1,45 +1,44 @@
-<!-- views/index.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
-</head>
-<body>
-<div class="container">
+    <head>
+        <meta charset="utf-8">
+        <title>Rate My Module</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> 
+        <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700|Catamaran:200,400,600,800" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <img src="/media/logo.svg">
+            <a href="/login" class="button">Log in</a>
+        </nav>
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Rate My Module </h1>
-        
-        <p>Login or Register with:</p>
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-        <a href="/index" class="btn btn-default"><span class="fa fa-user"></span> Homepage</a>
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-            <div class="input-group">
-                <input type="text" id="query" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" id="search" type="button">Search!</button>
-                </span>
-            </div><!-- /input-group -->
+        <header>
+            <form id="search" action="">
+                <input type="text" id="query" placeholder="">
+                <input type="submit" value="Search">
+            </form>
+        </header>
+        <div class="img-container video">
+            <video autoplay loop>
+                <source src="/media/video.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <main>
+            <div class="results">
+                
             </div>
-        </div>
-        <div id="results">
+        </main>
 
-        </div>
+        <footer>
 
-    </div>
-
-</div>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+        </footer>
+    </body>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
-</script>
-<script src="/js/ajax.js"></script>
-</body>
+    </script>
+    <script src="/js/image-sizing.js"></script>
+    <script src="/js/ajax.js"></script>
 </html>
