@@ -6,7 +6,17 @@
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
-  <form action="/action_page.php">
+  <p>Rating 1-5<p>
+  <form>
+  <input type="radio" name="rating" value="1" checked>1<br>
+  <input type="radio" name="rating" value="2">2<br>
+  <input type="radio" name="rating" value="3">3<br>
+  <input type="radio" name="rating" value="4">4<br>
+  <input type="radio" name="rating" value="5">5
+  </form>
+
+  <p>Comments</p>
+  <form>
   <textarea name="message" rows="10" cols="30"></textarea>
   <br>
   <input type="submit">
