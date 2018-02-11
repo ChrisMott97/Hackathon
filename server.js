@@ -8,7 +8,6 @@ var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
-var StarRating = require('vue-star-rating');
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
