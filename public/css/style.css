@@ -9,6 +9,10 @@ body{
 h1{
     color: white;
 }
+.button:hover{
+    opacity: 0.5;
+    color: white;
+}
 
 .button{
     border: 2px solid rgba(255,255,255,0.6);

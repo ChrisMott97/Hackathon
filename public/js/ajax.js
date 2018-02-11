@@ -9,7 +9,7 @@ $("#search").submit(function(e) {
             $(".results").append(
                 '<br><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="well"><h3><a href="/lecturer/'+lecturer.username+'">' + 
             lecturer.firstname + ' ' + lecturer.lastname + '</a></h3><br>' +
-            lecturer.subject + '</div> </div> </div>'
+            lecturer.subject + '<br>'+lecturer.modules+'</div> </div> </div>'
             );
         });
         $(".results").append(

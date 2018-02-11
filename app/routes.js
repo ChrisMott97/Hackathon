@@ -50,7 +50,7 @@ module.exports = function(app, passport) {
     })
 
     app.get('/api/lecturers/:query', function(req, res) {
-        lecturer.find({$or:[{"firstname": new RegExp(req.params.query)},{"lastname": new RegExp(req.params.query)},{"subject": new RegExp(req.params.query)}]}, function(err, results){
+        lecturer.find({$or:[{"firstname": new RegExp(req.params.query, 'i')},{"lastname": new RegExp(req.params.query, 'i')},{"subject": new RegExp(req.params.query, 'i')}, {"modules": new RegExp(req.params.query, 'i')}]}, function(err, results){
             res.json(results)
         });
     })
@@ -76,7 +76,7 @@ module.exports = function(app, passport) {
                     console.log(sum);
                     count += 1;
                 });
-                var avg = sum/count;
+                var avg = (sum/count).toFixed(2);
                 res.render('profile.ejs', {
                     lecturer: result,
                     posts: new_posts,
