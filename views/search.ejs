@@ -14,14 +14,32 @@
 
     <div class="jumbotron text-center">
         <h1><span class="fa fa-lock"></span> Rate My Module </h1>
-
+        
         <p>Login or Register with:</p>
-
         <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
         <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+            <div class="input-group">
+                <input type="text" id="query" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" id="search" type="button">Search!</button>
+                </span>
+            </div><!-- /input-group -->
+            </div>
+        </div>
+        <div id="results">
+
+        </div>
+
     </div>
 
 </div>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+</script>
+<script src="/js/ajax.js"></script>
 </body>
 </html>
 

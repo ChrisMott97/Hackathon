@@ -68,10 +68,13 @@ module.exports = function(app, passport) {
 
     app.get('/lecturers', function(req, res) {
         lecturer.find(function(err, results){
-            console.log(results);
-            res.render('results.ejs', {
-                lecturers : results
-            })
+            res.json(results)
+        });
+    })
+
+    app.get('/lecturers/:query', function(req, res) {
+        lecturer.find({"firstname": new RegExp(req.params.query)}, function(err, results){
+            res.json(results)
         });
     })
 
