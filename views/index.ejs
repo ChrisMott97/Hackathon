@@ -3,7 +3,15 @@
 <html>
 <head>
   <title>Homepage</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue">
+  export default {
+    data () {
+      return {
+        text: ''
+      }
+    }
+  }
+  </script>
 </head>
 <body>
   <p>Rating 1-5<p>
@@ -20,6 +28,23 @@
   <textarea name="message" rows="10" cols="30"></textarea>
   <br>
   <input type="submit">
+
+  <div id='example-textarea'>
+    <span>Comment Preview:</span>
+    <p>{{message}}</p>
+    <br>
+    <textarea v-model="message" placeholder="Your comment here"></textarea>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#example-textarea',
+      data: {
+        message: ''
+      }
+    })
+  </script>
+
 </form>
 </body>
 </html>
