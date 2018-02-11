@@ -10,8 +10,8 @@ module.exports = function(app, passport) {
         res.render('search.ejs')
     });
 
-    app.get('/index', function(req, res){
-      res.render('index.ejs')
+    app.get('/reviewPage', function(req, res){
+      res.render('reviewPage.ejs')
     });
 
     // =====================================
