@@ -1,27 +1,44 @@
-<!-- views/profile.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Rate My Lecturers</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body        { padding-top:20px; word-wrap:break-word; }
-    </style>
-</head>
-<body>
-<div class="container">
+    <head>
+        <meta charset="utf-8">
+        <title>Rate My Module</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> 
+        <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700|Catamaran:200,400,600,800" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <img src="/media/logo.svg">
+            <h1>Welcome, <%= user.local.firstname %></h1>
+            <a href="/logout" class="button">Log out</a>
+        </nav>
+        <header>
+            <form id="search" action="">
+                <input type="text" id="query" placeholder="">
+                <input type="submit" value="Search">
+            </form>
+        </header>
+        <div class="img-container video">
+            <video autoplay loop>
+                <source src="/media/video.mp4" type="video/mp4">
+            </video>
+        </div>
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Home</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+        <main>
+            <div class="results">
+                
+            </div>
+        </main>
 
-    <div class="row">
-        
-    </div>
+        <footer>
 
-</div>
-</body>
+        </footer>
+    </body>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+    </script>
+    <script src="/js/image-sizing.js"></script>
+    <script src="/js/ajax.js"></script>
 </html>
-

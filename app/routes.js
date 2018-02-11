@@ -70,27 +70,35 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
-    app.get('/lecturers', function(req, res) {
+    app.get('/api/lecturers', function(req, res) {
         lecturer.find(function(err, results){
             res.json(results)
         });
     })
 
-    app.get('/lecturers/:query', function(req, res) {
-        lecturer.find({"firstname": new RegExp(req.params.query)}, function(err, results){
+    app.get('/api/lecturers/:query', function(req, res) {
+        lecturer.find({$or:[{"firstname": new RegExp(req.params.query)},{"lastname": new RegExp(req.params.query)},{"subject": new RegExp(req.params.query)}]}, function(err, results){
             res.json(results)
         });
     })
-
-    app.get('/lecturer', function(req, res) {
-        res.render('lecturer.ejs')
-    })
-
-    app.post('/lecturer', isLoggedIn, function(req, res){
+    app.post('/api/lecturer', isLoggedIn, function(req, res){
         lecturer.create({ firstname: req.body.firstname , lastname: req.body.lastname, subject: req.body.subject}, function (err, new_lecturer) {
             if (err) return handleError(err);
-            console.log(new_lecturer);
-            res.redirect('/lecturers');
+            new_lecturer.username = new_lecturer.firstname.toLowerCase() + '.' + new_lecturer.lastname.toLowerCase();
+            new_lecturer.save();
+            res.redirect('/lecturer');
+        });
+    })
+    app.get('/lecturer', function(req, res) {
+        res.render('lecturer');
+    })
+    app.get('/lecturer/:username', function(req, res) {
+        lecturer.findOne({"username": req.params.username}, function(err, result){
+            if(err) return handleError(err);
+            console.log(result);
+            res.render('profile.ejs', {
+                lecturer: result
+            })
         });
     })
 };

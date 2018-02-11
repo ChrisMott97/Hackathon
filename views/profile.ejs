@@ -1,0 +1,30 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:10px; text-align: center}
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h1><%= lecturer.firstname + " " + lecturer.lastname%></h1>
+    <h3><%= lecturer.subject %></h3>
+
+    <form action="/lecturer/" <%= lecturer.username %> method="post"</form>
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+        <input type="submit" value="Submit">
+    </form>
+
+</div>
+
+</div>
+</body>
+</html>
+
